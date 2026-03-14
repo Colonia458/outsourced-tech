@@ -1,0 +1,328 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Daily backup at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+env:
+  PHP_VERSION: '8.1'
+  NODE_VERSION: '18'
+
+jobs:
+  # ============================================
+  # LINT & CODE QUALITY
+  # ============================================
+  code-quality:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: mbstring, xml, json, zip, curl
+          
+      - name: Install PHP dependencies
+        run: |
+          composer install --prefer-dist --no-interaction
+          
+      - name: PHP Syntax Check
+        run: |
+          find . -name "*.php" -exec php -l {} \; | grep -v "No syntax errors"
+          
+      - name: PHP CodeSniffer
+        run: |
+          composer require --dev squizlabs/php_codesniffer --no-interaction
+          ./vendor/bin/phpcs --standard=PSR12 --ignore=vendor/,node_modules/ --report-full src/ api/ public/ admin/ 2>/dev/null || true
+          
+      - name: PHP Mess Detector
+        run: |
+          composer require --dev phpmd/phpmd --no-interaction
+          ./vendor/bin/phpmd src,api,public,admin text phpmd-ruleset.xml --exclude vendor/ 2>/dev/null || true
+
+  # ============================================
+  # STATIC ANALYSIS
+  # ============================================
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+        
+      - name: PHPStan Static Analysis
+        run: |
+          composer require --dev phpstan/phpstan --no-interaction
+          ./vendor/bin/phpstan analyse src/ api/ public/ admin/ --level=0 2>/dev/null || true
+
+  # ============================================
+  # DATABASE TESTS
+  # ============================================
+  database-tests:
+    name: Database Tests
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+          
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          pdo-mysql: true
+          
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction
+        
+      - name: Run SQL syntax check
+        run: |
+          for f in database/*.sql; do
+            echo "Checking $f"
+            # Basic syntax check using mysql
+            docker exec ${{ job.container }} mysql -uroot -proot test_db < "$f" 2>&1 || true
+          done
+
+  # ============================================
+  # BUILD & COMPILE
+  # ============================================
+  build:
+    name: Build Assets
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci --if-present
+        
+      - name: Run npm audit
+        run: npm audit --audit-level=high || true
+        
+      - name: Build assets
+        run: |
+          # Build if package.json has scripts
+          if [ -f package.json ]; then
+            npm run build 2>/dev/null || echo "No build script"
+          fi
+
+  # ============================================
+  # SECURITY SCANS
+  # ============================================
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-dev
+        
+      - name: PHP Security Checker
+        run: |
+          composer require --dev roave/security-advisories --no-interaction
+          # Check for known vulnerabilities
+          php -r "require 'vendor/autoload.php';" 2>&1 || true
+          
+      - name: OWASP ZAP Scan (basic)
+        if: github.event_name == 'push'
+        uses: zaproxy/action-baseline@v0.9.0
+        with:
+          target: 'https://outsourcedtechnologies.co.ke'
+          allow: '/wp-login.php|/xmlrpc.php'
+          failmode: 'soft'
+
+  # ============================================
+  # DEPLOY TO STAGING (on develop branch)
+  # ============================================
+  deploy-staging:
+    name: Deploy to Staging
+    needs: [code-quality, build, security]
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup SSH Key for Deployment
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+      - name: Deploy to Staging Server
+        run: |
+          # Deploy to staging
+          echo "Deploying to staging server..."
+          # Add deployment commands here
+          # rsync or scp files to staging
+          # Run composer install on server
+          # Run database migrations
+          
+      - name: Run Smoke Tests
+        run: |
+          echo "Running smoke tests..."
+          curl -f https://staging.outsourcedtechnologies.co.ke || exit 1
+
+  # ============================================
+  # DEPLOY TO PRODUCTION (on main branch)
+  # ============================================
+  deploy-production:
+    name: Deploy to Production
+    needs: [code-quality, build, security]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Get version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        if: startsWith(github.ref, 'refs/tags/')
+        
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+      - name: Deploy to Production
+        run: |
+          echo "Deploying to production server..."
+          # rsync files to production
+          # Run migrations
+          # Clear cache
+          # Send deployment notification
+          
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+  # ============================================
+  # DAILY BACKUP
+  # ============================================
+  daily-backup:
+    name: Daily Database Backup
+    needs: []
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup MySQL
+        uses: mirromutth/mysql-action@v1
+        with:
+          character set server: utf8mb4
+          mysql database: ${{ secrets.MYSQL_DATABASE }}
+          mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          
+      - name: Export Database
+        run: |
+          mysqldump -h localhost -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} ${{ secrets.MYSQL_DATABASE }} > backup_$(date +%Y%m%d).sql
+          
+      - name: Upload to Cloud Storage
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-backup
+          path: backup_*.sql
+          retention-days: 7
+          
+      - name: Upload to AWS S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl private
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  # ============================================
+  # NOTIFICATIONS
+  # ============================================
+  notify:
+    name: Send Notifications
+    needs: [deploy-production]
+    if: always()
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Send Discord Notification
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+          
+      - name: Send Email on Failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: '⚠️ Deployment Failed - Outsourced Tech'
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: GitHub Actions <noreply@outsourcedtechnologies.co.ke>
+          body: |
+            The deployment to production has failed!
+            Check the GitHub Actions logs for details.

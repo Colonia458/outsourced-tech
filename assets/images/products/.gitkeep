@@ -1,0 +1,14 @@
+# Product Images Directory
+
+This directory stores product images for the e-commerce store.
+
+## Image Requirements
+- Format: JPG or PNG
+- Recommended size: 800x800 pixels (square)
+- Filename: Use product SKU (e.g., LAP-DELL-001.jpg)
+
+## Upload Images
+Upload product images via the admin panel at:
+Admin > Products > Edit Product > Upload Image
+
+Or manually upload files here and then add them via the database.

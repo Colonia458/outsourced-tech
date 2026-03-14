@@ -1,0 +1,89 @@
+[2026-03-11 11:52:17] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:52:17] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 143985
+[2026-03-11 11:52:20] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:20] send_otp_email result - Success: false
+[2026-03-11 11:52:20] Email send result: failed
+[2026-03-11 11:52:20] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:52:20] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 494168
+[2026-03-11 11:52:25] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:25] send_otp_email result - Success: false
+[2026-03-11 11:52:25] Email send result: failed
+[2026-03-11 11:52:25] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:52:25] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 328984
+[2026-03-11 11:52:29] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:29] send_otp_email result - Success: false
+[2026-03-11 11:52:29] Email send result: failed
+[2026-03-11 11:52:29] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:52:29] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 274611
+[2026-03-11 11:52:32] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:32] send_otp_email result - Success: false
+[2026-03-11 11:52:32] Email send result: failed
+[2026-03-11 11:52:32] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:52:32] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 551641
+[2026-03-11 11:52:35] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:35] send_otp_email result - Success: false
+[2026-03-11 11:52:35] Email send result: failed
+[2026-03-11 11:57:04] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:57:04] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 042055
+[2026-03-11 11:57:09] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:57:09] send_otp_email result - Success: false
+[2026-03-11 11:57:09] Email send result: failed
+[2026-03-11 11:57:34] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:57:34] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 786258
+[2026-03-11 11:57:36] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:57:36] send_otp_email result - Success: false
+[2026-03-11 11:57:36] Email send result: failed
+[2026-03-11 11:57:42] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-11 11:57:42] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 976645
+[2026-03-11 11:57:45] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-11 11:57:45] send_otp_email result - Success: false
+[2026-03-11 11:57:45] Email send result: failed
+[2026-03-14 10:47:04] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:47:04] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 077924
+[2026-03-14 10:47:15] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:47:15] send_otp_email result - Success: false
+[2026-03-14 10:47:15] Email send result: failed
+[2026-03-14 10:47:15] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:47:15] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 504417
+[2026-03-14 10:47:44] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:47:44] send_otp_email result - Success: false
+[2026-03-14 10:47:44] Email send result: failed
+[2026-03-14 10:47:44] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:47:44] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 185274
+[2026-03-14 10:48:05] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:48:05] send_otp_email result - Success: false
+[2026-03-14 10:48:05] Email send result: failed
+[2026-03-14 10:48:05] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:48:05] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 010248
+[2026-03-14 10:48:26] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:48:26] send_otp_email result - Success: false
+[2026-03-14 10:48:26] Email send result: failed
+[2026-03-14 10:48:26] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:48:26] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 749228
+[2026-03-14 10:48:47] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:48:47] send_otp_email result - Success: false
+[2026-03-14 10:48:47] Email send result: failed
+[2026-03-14 10:48:47] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:48:47] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 607190
+[2026-03-14 10:48:58] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:48:58] send_otp_email result - Success: false
+[2026-03-14 10:48:58] Email send result: failed
+[2026-03-14 10:48:58] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:48:58] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 554266
+[2026-03-14 10:49:09] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:49:09] send_otp_email result - Success: false
+[2026-03-14 10:49:09] Email send result: failed
+[2026-03-14 10:49:09] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:49:09] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 229410
+[2026-03-14 10:49:20] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:49:20] send_otp_email result - Success: false
+[2026-03-14 10:49:20] Email send result: failed
+[2026-03-14 10:49:20] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 10:49:20] send_otp_email called - Email: gordonogolo@gmail.com, Purpose: password_reset, OTP: 846942
+[2026-03-14 10:49:20] PHPMailer Exception: SMTP Error: Could not connect to SMTP host. Failed to connect to server
+[2026-03-14 10:49:20] send_otp_email result - Success: false
+[2026-03-14 10:49:20] Email send result: failed
+[2026-03-14 13:17:26] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 13:17:29] PHPMailer Exception: SMTP Error: Could not authenticate.
+[2026-03-14 13:20:27] get_email_config: {"driver":"smtp","host":"smtp.gmail.com","port":587,"username":"","password":"(empty)","encryption":"tls","from_address":"noreply@outsourcedtechnologies.co.ke","from_name":"Outsourced Technologies"}
+[2026-03-14 13:20:31] PHPMailer Exception: SMTP Error: Could not authenticate.

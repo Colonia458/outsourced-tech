@@ -1,0 +1,19 @@
+[2026-03-11 11:52:20] Error: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:25] Error: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:29] Error: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:32] Error: SMTP Error: Could not authenticate.
+[2026-03-11 11:52:35] Error: SMTP Error: Could not authenticate.
+[2026-03-11 11:57:09] Error: SMTP Error: Could not authenticate.
+[2026-03-11 11:57:36] Error: SMTP Error: Could not authenticate.
+[2026-03-11 11:57:45] Error: SMTP Error: Could not authenticate.
+[2026-03-14 10:47:15] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.gmail.com failed: No such host is known. 
+[2026-03-14 10:47:44] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server SMTP code: 10060 Additional SMTP info: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+[2026-03-14 10:48:05] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server SMTP code: 10060 Additional SMTP info: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+[2026-03-14 10:48:26] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server SMTP code: 10060 Additional SMTP info: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+[2026-03-14 10:48:47] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server SMTP code: 10060 Additional SMTP info: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+[2026-03-14 10:48:58] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.gmail.com failed: No such host is known. 
+[2026-03-14 10:49:09] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.gmail.com failed: No such host is known. 
+[2026-03-14 10:49:20] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.gmail.com failed: No such host is known. 
+[2026-03-14 10:49:20] Error: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.gmail.com failed: No such host is known. 
+[2026-03-14 13:17:29] Error: SMTP Error: Could not authenticate.
+[2026-03-14 13:20:31] Error: SMTP Error: Could not authenticate.

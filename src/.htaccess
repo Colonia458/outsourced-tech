@@ -1,0 +1,5 @@
+# Deny all web access to this directory
+# This prevents direct access to config, database, and security files
+
+Order deny,allow
+Deny from all

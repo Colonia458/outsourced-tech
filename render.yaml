@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: outsourced-tech
+    env: php
+    buildCommand: |
+      curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      composer install --no-dev --optimize-autoloader
+      mkdir -p logs
+    startCommand: |
+      cp -r . /var/www/html
+      chmod -R 755 /var/www/html/public
+      chmod -R 755 /var/www/html/logs
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: LOG_ERRORS
+        value: true
