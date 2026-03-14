@@ -19,7 +19,7 @@ git init
 git add .
 
 # 3. First commit
-git commit -m "Initial commit - E-commerce with automation"
+git commit -m "Initial commit - E-commerce with automation"git innit
 
 # 4. Add GitHub remote (replace YOUR_USERNAME)
 git remote add origin https://github.com/YOUR_USERNAME/outsourced-tech.git
