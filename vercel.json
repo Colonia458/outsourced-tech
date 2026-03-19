@@ -5,10 +5,7 @@
       "schedule": "0 6 * * *"
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.php"
-    }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index.php" }
   ]
 }
