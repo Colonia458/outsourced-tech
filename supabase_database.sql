@@ -333,6 +333,29 @@ CREATE TABLE admin_users (
     created_at TIMESTAMP DEFAULT NOW()
 );
 
+-- Admin Activity Logs Table
+CREATE TABLE admin_activity_logs (
+    id SERIAL PRIMARY KEY,
+    admin_id INT,
+    action VARCHAR(100) NOT NULL,
+    description TEXT,
+    ip_address VARCHAR(50),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Audit Log Table
+CREATE TABLE audit_log (
+    id SERIAL PRIMARY KEY,
+    user_id INT,
+    action VARCHAR(100) NOT NULL,
+    table_name VARCHAR(100),
+    record_id INT,
+    old_values JSONB,
+    new_values JSONB,
+    ip_address VARCHAR(50),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
 -- Inventory Alerts Table
 CREATE TABLE inventory_alerts (
     id SERIAL PRIMARY KEY,
@@ -359,6 +382,88 @@ CREATE TABLE sms_log (
     phone VARCHAR(50) NOT NULL,
     message TEXT NOT NULL,
     status VARCHAR(50) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- SMS Subscriptions Table
+CREATE TABLE sms_subscriptions (
+    id SERIAL PRIMARY KEY,
+    phone VARCHAR(50) UNIQUE NOT NULL,
+    subscribed BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- SMS Templates Table
+CREATE TABLE sms_templates (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Notification Queue Table
+CREATE TABLE notification_queue (
+    id SERIAL PRIMARY KEY,
+    user_id INT,
+    type VARCHAR(50) NOT NULL,
+    title VARCHAR(255),
+    message TEXT,
+    status VARCHAR(50) DEFAULT 'pending',
+    scheduled_at TIMESTAMP,
+    sent_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Push Notifications Table
+CREATE TABLE push_notifications (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    url VARCHAR(500),
+    scheduled_at TIMESTAMP,
+    status VARCHAR(50) DEFAULT 'draft',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Push Notification Recipients Table
+CREATE TABLE push_notification_recipients (
+    id SERIAL PRIMARY KEY,
+    notification_id INT NOT NULL,
+    user_id INT,
+    device_token VARCHAR(255),
+    status VARCHAR(50) DEFAULT 'pending',
+    sent_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Push Subscriptions Table
+CREATE TABLE push_subscriptions (
+    id SERIAL PRIMARY KEY,
+    user_id INT,
+    endpoint VARCHAR(500) NOT NULL,
+    keys JSONB,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Report Logs Table
+CREATE TABLE report_logs (
+    id SERIAL PRIMARY KEY,
+    report_type VARCHAR(100) NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending',
+    file_path VARCHAR(500),
+    error_message TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Report Schedules Table
+CREATE TABLE report_schedules (
+    id SERIAL PRIMARY KEY,
+    report_type VARCHAR(100) NOT NULL,
+    frequency VARCHAR(50) NOT NULL,
+    recipients JSONB,
+    enabled BOOLEAN DEFAULT TRUE,
+    last_run TIMESTAMP,
+    next_run TIMESTAMP,
     created_at TIMESTAMP DEFAULT NOW()
 );
 
